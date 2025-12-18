@@ -26,6 +26,11 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
+mongoose.connect(MONGO_URL)
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
+
+
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
