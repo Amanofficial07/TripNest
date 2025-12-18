@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top py-3">
   <div class="container-fluid">
-    <a class="navbar-brand text-2xl" href="/"><i class="fa-regular fa-compass"></i></a>
+    <a class="navbar-brand fs-4 fw-semibold d-flex align-items-center gap-2" href="/">
+      <i class="fa-regular fa-compass text-primary"></i>
+      <span>TripNest</span>
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -11,18 +14,28 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link text-lg" href="/">Home</a>
-        <a class="nav-link text-lg" href="/listings">All Listings</a>
-        <a class="nav-link text-lg" href="/listings/new">Add new Listing</a>
+        <a class="nav-link text-lg d-flex align-items-center gap-1" href="/">
+          <i class="fa-solid fa-house-chimney small text-muted"></i>
+          <span>Home</span>
+        </a>
+        <a class="nav-link text-lg d-flex align-items-center gap-1" href="/listings">
+          <i class="fa-solid fa-bed small text-muted"></i>
+          <span>All Listings</span>
+        </a>
+        <% if (currUser && currUser.role === "admin") { %>
+          <a class="nav-link text-lg" href="/listings/new">Add new listing</a>
+        <% } %>
       </div>
-      <div class="navbar-nav ms-auto">
-        <%if(!currUser){%>
-        <a class="nav-link text-lg" href="/signup">Sign up</a>
-        <a class="nav-link text-lg" href="/login">Login</a>
-        <%}%>
-        <%if(currUser){%>
-        <a class="nav-link text-lg" href="/logout">Logout</a>
-        <%}%>
+      <div class="navbar-nav ms-auto align-items-center gap-2">
+        <% if (!currUser) { %>
+          <a class="btn btn-outline-dark btn-sm px-3" href="/login">Login</a>
+          <a class="btn btn-primary btn-sm px-3" href="/signup">Sign up</a>
+        <% } else { %>
+          <span class="navbar-text me-2 small text-muted d-none d-md-inline">
+            Hi, <strong><%= currUser.username %></strong>
+          </span>
+          <a class="btn btn-outline-danger btn-sm px-3" href="/logout">Logout</a>
+        <% } %>
       </div>
     </div>
   </div>

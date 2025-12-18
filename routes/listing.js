@@ -3,7 +3,7 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const Listing = require("../models/Listing.js");
-const { isOwner, validateListing, isLoggedIn } = require("../middleware.js");
+const { isOwner, validateListing, isLoggedIn, isAdmin } = require("../middleware.js");
 //index route
 router.get(
   "/",
@@ -12,14 +12,15 @@ router.get(
     res.render("listings/index.ejs", { alllistings });
   })
 );
-//new route
-router.get("/new", isLoggedIn, (req, res) => {
-  console.log(req.user);
+//new route (admin only)
+router.get("/new", isLoggedIn, isAdmin, (req, res) => {
   res.render("listings/new.ejs");
 });
 //create route
 router.post(
   "/",
+  isLoggedIn,
+  isAdmin,
   validateListing,
   wrapAsync(async (req, res, next) => {
     let newListing = new Listing(req.body.listing);

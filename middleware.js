@@ -1,6 +1,7 @@
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewShema } = require("./Schema.js");
 const Listing = require("./models/Listing.js");
+
 module.exports.isLoggedIn = (req, res, next) => {
   req.session.redirectUrl = req.originalUrl;
   if (!req.isAuthenticated()) {
@@ -13,6 +14,15 @@ module.exports.savedRedirectUrl = (req, res, next) => {
   if (req.session.redirectUrl) res.locals.redirectUrl = req.session.redirectUrl;
   next();
 };
+
+module.exports.isAdmin = (req, res, next) => {
+  if (!req.user || req.user.role !== "admin") {
+    req.flash("error", "Only admin can add or manage listings.");
+    return res.redirect("/listings");
+  }
+  next();
+};
+
 module.exports.isOwner = async (req, res, next) => {
   let { id } = req.params;
   let listing = await Listing.findById(id);

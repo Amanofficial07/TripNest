@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const port = process.env.PORT || 8080;
-const MONGO_URL = process.env.MONGO_URL;
+const MONGO_URL = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wanderlust";
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -32,9 +32,10 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+
 const sessionOptions = {
   secret: "mysupersecretcode",
-  resolve: false,
+  resave: false,
   saveUninitialized: true,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
@@ -42,9 +43,7 @@ const sessionOptions = {
     httpOnly: true,
   },
 };
-app.get("/", (req, res) => {
-  res.send("hello,I am the root!");
-});
+
 app.use(session(sessionOptions));
 app.use(flash());
 app.use(passport.initialize());
@@ -56,8 +55,11 @@ app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
-  console.log(res.locals.success);
   next();
+});
+
+app.get("/", (req, res) => {
+  res.render("home.ejs");
 });
 app.get("/demouser", async (req, res) => {
   let fakeUser = new User({

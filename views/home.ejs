@@ -1,0 +1,103 @@
+<% layout("./layouts/boilerplates.ejs") -%>
+
+<section class="py-5">
+  <div class="row align-items-center">
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <h1 class="display-4 fw-bold mb-3">Find your next escape with <span class="text-primary">TripNest</span></h1>
+      <p class="lead text-muted mb-4">
+        Handpicked stays for curious travellers — from cozy cabins in the mountains to beachfront villas and city lofts.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <% if (!currUser) { %>
+          <a href="/signup" class="btn btn-primary btn-lg px-4">Start your journey</a>
+          <a href="/login" class="btn btn-outline-primary btn-lg px-4">Login</a>
+        <% } else { %>
+          <a href="/listings" class="btn btn-primary btn-lg px-4">Explore all stays</a>
+          <a href="/listings/new" class="btn btn-outline-primary btn-lg px-4">List your place</a>
+        <% } %>
+      </div>
+      <div class="mt-4 text-muted small">
+        <i class="fa-solid fa-earth-americas me-2"></i>
+        Trusted stays across multiple countries, reviewed by real travellers.
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="row g-3">
+        <div class="col-6">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Tuscan villa">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1521401830884-6c03c1c87ebb?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Mountain cabin">
+          </div>
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="City loft">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-5">
+  <div class="d-flex justify-content-between align-items-end mb-3 flex-wrap gap-2">
+    <div>
+      <h2 class="h3 fw-semibold mb-1">Why travellers love TripNest</h2>
+      <p class="text-muted mb-0">Everything you need to feel at home, wherever you go.</p>
+    </div>
+    <a href="/listings" class="btn btn-outline-secondary btn-sm">Browse all stays</a>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 rounded-4">
+        <div class="card-body text-center p-4">
+          <div class="mb-3">
+            <span class="rounded-circle bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center" style="width:3rem;height:3rem;">
+              <i class="fa-solid fa-map-location-dot"></i>
+            </span>
+          </div>
+          <h5 class="card-title mb-2">Unique stays</h5>
+          <p class="card-text text-muted mb-0">
+            Curated homes, cabins and villas you won’t find in a typical hotel search.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 rounded-4">
+        <div class="card-body text-center p-4">
+          <div class="mb-3">
+            <span class="rounded-circle bg-warning-subtle text-warning d-inline-flex align-items-center justify-content-center" style="width:3rem;height:3rem;">
+              <i class="fa-solid fa-star"></i>
+            </span>
+          </div>
+          <h5 class="card-title mb-2">Real reviews</h5>
+          <p class="card-text text-muted mb-0">
+            Honest feedback from real travellers so you can book with confidence.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 rounded-4">
+        <div class="card-body text-center p-4">
+          <div class="mb-3">
+            <span class="rounded-circle bg-success-subtle text-success d-inline-flex align-items-center justify-content-center" style="width:3rem;height:3rem;">
+              <i class="fa-solid fa-shield-heart"></i>
+            </span>
+          </div>
+          <h5 class="card-title mb-2">Secure & simple</h5>
+          <p class="card-text text-muted mb-0">
+            Login, manage your bookings and list your own place with a clean, modern UI.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
