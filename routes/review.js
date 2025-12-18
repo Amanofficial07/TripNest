@@ -7,6 +7,7 @@ const { validateReview, isLoggedIn } = require("../middleware.js");
 //Post Reviews
 router.post(
   "/",
+  isLoggedIn,
   validateReview,
   wrapAsync(async (req, res) => {
     console.log(req.params.id);
@@ -23,6 +24,7 @@ router.post(
 //Delete Review route
 router.delete(
   "/:reviewId",
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     let { id, reviewId } = req.params;
     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
